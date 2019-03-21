@@ -6,11 +6,11 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Modules
 
-###Personnal
+### Personnal
 
 Personnal Angular Spotify module project : [SpotifyForAngular](https://github.com/maximeancellin/spotifyForAngular)
 
-###NPM module
+### NPM module
 
 | Name | Type | command | Documentation |
 | :--: | :--: | :-----: | :-----------: |
