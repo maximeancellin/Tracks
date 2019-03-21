@@ -6,6 +6,12 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Modules
 
+###Personnal
+
+Personnal Angular Spotify module project : [SpotifyForAngular](https://github.com/maximeancellin/spotifyForAngular)
+
+###NPM module
+
 | Name | Type | command | Documentation |
 | :--: | :--: | :-----: | :-----------: |
 | Angular material | Design | npm install --save @angular/material @angular/cdk @angular/animations | https://material.angular.io/guides |
