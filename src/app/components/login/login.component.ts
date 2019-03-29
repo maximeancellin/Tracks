@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
       scope:  scopes
     };
     this.authService.configure(ac).authorize();
-  }
 
+    console.log(this.tokenSvc.oAuthToken);
+  }
 }

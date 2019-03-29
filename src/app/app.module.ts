@@ -9,11 +9,13 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 
 import {SpotifyAuthModule} from 'spotify-auth';
 import {SpotifyAuthInterceptor2} from './interceptor/spotifyAuth.interceptor';
+import { UserComponent } from './components/user/user.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
