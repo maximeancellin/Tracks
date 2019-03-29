@@ -1,0 +1,11 @@
+
+{
+  "/spotify-account": {
+    "target": "",
+    "secure": true,
+    "pathRewrite": {
+      "^/spotify-account": ""
+    },
+    "changeOrigin": true
+  }
+}
