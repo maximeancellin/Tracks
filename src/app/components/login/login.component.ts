@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthConfig, AuthService, ScopesBuilder, TokenService} from 'spotify-auth';
+import {AuthConfig, AuthService, ScopesBuilder, SpotifyAuthInterceptor, SpotifyAuthResponse, TokenService} from 'spotify-auth';
 import {Router} from '@angular/router';
 import {environment} from '../../../environments/environment';
 
@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   }
 
   public spotifyLogin() {
-    const scopes = new ScopesBuilder()/* .withScopes(ScopesBuilder.LIBRARY) */.build();
+    const scopes = new ScopesBuilder().build();
     const ac:  AuthConfig  = {
       client_id:  environment.spotifyClientId,
       response_type:  'token',
@@ -26,8 +26,9 @@ export class LoginComponent implements OnInit {
       show_dialog:  true,
       scope:  scopes
     };
-    this.authService.configure(ac).authorize();
 
-    console.log(this.tokenSvc.oAuthToken);
+    this.authService.configure(ac).authorize();
   }
+
+
 }
