@@ -1,9 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {TokenService} from 'spotify-auth';
 import {Subscription} from 'rxjs';
-import {InfoService} from '../../services/info.service';
 import {switchMap} from 'rxjs/operators';
-import {isEmpty} from 'rxjs-compat/operator/isEmpty';
+import {SpotifyService} from '../../services/spotify.service';
+import {CheckAuthService} from '../../services/check-auth.service';
 
 @Component({
   selector: 'app-user',
@@ -12,19 +12,17 @@ import {isEmpty} from 'rxjs-compat/operator/isEmpty';
 })
 export class UserComponent implements OnInit, OnDestroy {
 
-  constructor(private infoSvc: InfoService, private tokenSvc: TokenService) { }
-
-  public get jUser(): {} {
-    return JSON.stringify(this.user, null, 2);
-  }
-
   private stream: Subscription | null = null;
 
   public user: {} = {};
 
+  constructor(private spotify: SpotifyService, private tokenSvc: TokenService, private auth: CheckAuthService) {
+    auth.checkConnection();
+  }
+
   ngOnInit() {
     const stream = this.tokenSvc.authTokens.pipe(switchMap((x) => {
-      return this.infoSvc.fetchUserInfo();
+      return this.spotify.userInfo();
     }));
     this.stream = stream.subscribe((x) => this.user = x);
   }
@@ -34,9 +32,4 @@ export class UserComponent implements OnInit, OnDestroy {
       this.stream.unsubscribe();
     }
   }
-
-  public hasUser(): boolean {
-    return !!this.user;
-  }
-
 }
