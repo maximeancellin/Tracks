@@ -106,8 +106,11 @@ export class SpotifyService {
   }
 
   public tracksFeatures(ids): Observable<{}> {
+    const parameters = this.toQueryString({
+      'ids' : ids
+    });
 
-    return this.http.get(this.apiUrl + 'audio-features?' + ids).pipe(
+    return this.http.get(this.apiUrl + 'audio-features?' + parameters).pipe(
       tap((data: {}) => {
         this.data$.next(this.data);
       }),
