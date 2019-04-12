@@ -75,6 +75,27 @@ export class SpotifyService {
    */
 
   /*
+   * START Artists
+   */
+
+  public artists(ids): Observable<{}> {
+    const parameters = this.toQueryString({
+      'ids' : ids
+    });
+
+    return this.http.get(this.apiUrl + 'artists?' + parameters).pipe(
+      tap((data: {}) => {
+        this.data$.next(this.data);
+      }),
+      catchError(this.handleError('getSelf'))
+    );
+  }
+
+  /*
+   * END Artists
+   */
+
+  /*
    *  Tools
    */
 
