@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthService} from 'spotify-auth';
 import {filter} from 'rxjs/operators';
+import {CheckAuthService} from './services/check-auth.service';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,9 @@ import {filter} from 'rxjs/operators';
 export class AppComponent implements OnInit {
   title = 'Tracks';
 
-  constructor(private  authService:  AuthService, private  router:  Router) {
+  constructor(private  authService:  AuthService, private  router:  Router, private auth: CheckAuthService) {
+    // auth.checkConnection();
+    // router.navigateByUrl('/home');
   }
 
   ngOnInit() {
