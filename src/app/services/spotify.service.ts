@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {BehaviorSubject, Observable, of} from 'rxjs';
-import {catchError, tap} from 'rxjs/operators';
+import {catchError, map, tap} from 'rxjs/operators';
 import {environment} from '../../environments/environment';
 
 @Injectable({
@@ -45,14 +45,59 @@ export class SpotifyService {
    */
 
   /*
+   *  Search
+   */
+
+  public search(input, type = 'track,artist', market = 'FR', limit = '20', offset = '0'): Observable<{}> {
+    const head = new HttpHeaders({
+      'Content-Type' : 'application/json; charset=utf-8'
+    });
+
+    const parameters = this.toQueryString({
+      'q' : input,
+      'type' : type,
+      'market' : market,
+      'limit' : limit,
+      'offset' : offset
+    });
+
+    return this.http.get(this.apiUrl + 'search?' + parameters, {headers : head}).pipe(
+      tap((data: {}) => {
+        console.log(data);
+        this.data$.next(this.data);
+      }),
+      catchError(this.handleError('getSelf'))
+    );
+  }
+
+  /*
+   *  END Search
+   */
+
+  /*
    *  Tools
    */
+
+  private toQueryString(obj: Object): string {
+    const parts = [];
+    for (const key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        parts.push(encodeURIComponent(key) + '=' + encodeURIComponent(obj[key]));
+      }
+    }
+
+    return parts.join('&');
+  }
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       (result as any) = error;
       return of(result as T);
     };
+  }
+
+  public getJson(data): {} {
+    return JSON.stringify(data);
   }
 
   /*

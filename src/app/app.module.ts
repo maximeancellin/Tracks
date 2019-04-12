@@ -11,13 +11,15 @@ import {SpotifyAuthModule} from 'spotify-auth';
 import {SpotifyAuthInterceptor2} from './interceptor/spotifyAuth.interceptor';
 import { UserComponent } from './components/user/user.component';
 import { HomeComponent } from './components/home/home.component';
+import { SearchComponent } from './components/search/search.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     UserComponent,
-    HomeComponent
+    HomeComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

@@ -17,7 +17,7 @@ export class UserComponent implements OnInit, OnDestroy {
   public user: {} = {};
 
   constructor(private spotify: SpotifyService, private tokenSvc: TokenService, private auth: CheckAuthService) {
-    auth.checkConnection();
+    // auth.checkConnection();
   }
 
   ngOnInit() {
@@ -25,6 +25,7 @@ export class UserComponent implements OnInit, OnDestroy {
       return this.spotify.userInfo();
     }));
     this.stream = stream.subscribe((x) => this.user = x);
+    // console.log(JSON.stringify(this.user, null, 2));
   }
 
   ngOnDestroy(): void {
