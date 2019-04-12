@@ -78,12 +78,58 @@ export class SpotifyService {
    * START Artists
    */
 
+  // TODO à tester
+
   public artists(ids): Observable<{}> {
     const parameters = this.toQueryString({
       'ids' : ids
     });
 
     return this.http.get(this.apiUrl + 'artists?' + parameters).pipe(
+      tap((data: {}) => {
+        this.data$.next(this.data);
+      }),
+      catchError(this.handleError('getSelf'))
+    );
+  }
+
+  public artistAlbums(id, group = 'single,appears_on', market = 'FR', limit = '20', offset = '0'): Observable<{}> {
+    const head = new HttpHeaders({
+      'Content-Type' : 'application/json; charset=utf-8'
+    });
+
+    const parameters = this.toQueryString({
+      'include_groups' : group,
+      'market' : market,
+      'limit' : limit,
+      'offset' : offset
+    });
+
+    return this.http.get(this.apiUrl + 'artists/' + id + '/albums?' + parameters, {headers : head}).pipe(
+      tap((data: {}) => {
+        console.log(data);
+        this.data$.next(this.data);
+      }),
+      catchError(this.handleError('getSelf'))
+    );
+  }
+
+  public artistTopTracks(id, country): Observable<{}> {
+    const parameters = this.toQueryString({
+      'country' : country
+    });
+
+    return this.http.get(this.apiUrl + 'artists/' + id + '/top-tracks?' + parameters).pipe(
+      tap((data: {}) => {
+        this.data$.next(this.data);
+      }),
+      catchError(this.handleError('getSelf'))
+    );
+  }
+
+  public artistRelated(id): Observable<{}> {
+
+    return this.http.get(this.apiUrl + 'artists/' + id + '/related-artists').pipe(
       tap((data: {}) => {
         this.data$.next(this.data);
       }),
