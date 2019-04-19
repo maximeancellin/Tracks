@@ -78,8 +78,6 @@ export class SpotifyService {
    * START Artists
    */
 
-  // TODO à tester
-
   public artists(ids): Observable<{}> {
     const parameters = this.toQueryString({
       'ids' : ids
@@ -93,7 +91,7 @@ export class SpotifyService {
     );
   }
 
-  public artistAlbums(id, group = 'single,appears_on', market = 'FR', limit = '20', offset = '0'): Observable<{}> {
+  public artistAlbums(id, group = 'single,appears_on', market = 'FR', limit = 1, offset = 0): Observable<{}> {
     const head = new HttpHeaders({
       'Content-Type' : 'application/json; charset=utf-8'
     });
@@ -107,7 +105,6 @@ export class SpotifyService {
 
     return this.http.get(this.apiUrl + 'artists/' + id + '/albums?' + parameters, {headers : head}).pipe(
       tap((data: {}) => {
-        console.log(data);
         this.data$.next(this.data);
       }),
       catchError(this.handleError('getSelf'))
