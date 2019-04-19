@@ -74,6 +74,54 @@ export class SpotifyService {
    *  END Search
    */
 
+
+  /*
+   *  START Tracks
+   */
+
+  // TODO Tester les appels liés au tracks
+
+  public tracks(ids, market = 'FR'): Observable<{}> {
+    const parameters = this.toQueryString({
+      'ids' : ids,
+      'market' : market
+    });
+
+    return this.http.get(this.apiUrl + 'tracks?' + parameters).pipe(
+      tap((data: {}) => {
+        this.data$.next(this.data);
+      }),
+      catchError(this.handleError('getSelf'))
+    );
+  }
+
+  public trackAnalysis(id): Observable<{}> {
+
+    return this.http.get(this.apiUrl + 'audio-analysis/' + id).pipe(
+      tap((data: {}) => {
+        this.data$.next(this.data);
+      }),
+      catchError(this.handleError('getSelf'))
+    );
+  }
+
+  public tracksFeatures(ids): Observable<{}> {
+    const parameters = this.toQueryString({
+      'ids' : ids
+    });
+
+    return this.http.get(this.apiUrl + 'audio-features?' + parameters).pipe(
+      tap((data: {}) => {
+        this.data$.next(this.data);
+      }),
+      catchError(this.handleError('getSelf'))
+    );
+  }
+
+  /*
+   *  END Tracks
+   */
+
   /*
    *  Tools
    */
