@@ -181,7 +181,7 @@ export class SpotifyService {
     );
   }
 
-  public playerRepeat(device, state = 'context'): Observable<{}> {
+  public playerRepeat(device, state = 'track'): Observable<{}> {
     const parameters = this.toQueryString({
       'device_id' : device,
       'state' : state,
