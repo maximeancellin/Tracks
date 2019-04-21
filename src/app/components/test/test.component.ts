@@ -18,9 +18,46 @@ export class TestComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     const stream = this.tokenSvc.authTokens.pipe(switchMap((x) => {
-      return this.spotify.tracks('7ouMYWpwJ422jRcDASZB7P');
-      return this.spotify.tracksFeatures('7ouMYWpwJ422jRcDASZB7P');
-      return this.spotify.trackAnalysis('7ouMYWpwJ422jRcDASZB7P');
+      /*
+       *  User
+       */
+      console.log('START USER');
+      console.log(this.spotify.userInfo());
+      console.log(this.spotify.userInfoById(''));
+      console.log('END USER');
+
+      /*
+       *  Search
+       */
+      console.log('START SEARCH');
+      console.log(this.spotify.search(''));
+      console.log('END SEARCH');
+
+      /*
+       *  Playlist
+       */
+      console.log('START PLAYLIST');
+      console.log(this.spotify.playlistCreate('', '', ''));
+      console.log(this.spotify.playlistReorder('', 0, 1, 2));
+      console.log(this.spotify.playlistUpdate('', '', ''));
+      console.log(this.spotify.playlistsById(''));
+      console.log(this.spotify.playlistDeleteTracks('', ''));
+      console.log(this.spotify.playlists());
+      console.log(this.spotify.playlistAddTracks('', '', ''));
+      console.log(this.spotify.playlistsByUser(''));
+      console.log(this.spotify.playlistTracks(''));
+      console.log('END PLAYLIST');
+
+      /*
+       *  Tracks
+       */
+      console.log('START TRACKS');
+      console.log();
+      console.log('END TRACKS');
+
+      console.log(this.spotify.tracks('7ouMYWpwJ422jRcDASZB7P'));
+
+      return null;
     }));
     this.stream = stream.subscribe((x) => this.data = x);
   }
