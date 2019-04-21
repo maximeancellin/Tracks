@@ -12,6 +12,7 @@ import {SpotifyAuthInterceptor2} from './interceptor/spotifyAuth.interceptor';
 import { UserComponent } from './components/user/user.component';
 import { HomeComponent } from './components/home/home.component';
 import { SearchComponent } from './components/search/search.component';
+import { TestComponent } from './components/test/test.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { SearchComponent } from './components/search/search.component';
     LoginComponent,
     UserComponent,
     HomeComponent,
-    SearchComponent
+    SearchComponent,
+    TestComponent
   ],
   imports: [
     BrowserModule,

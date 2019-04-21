@@ -266,6 +266,8 @@ export class SpotifyService {
       'market' : market
     });
 
+    console.log(parameters);
+
     return this.http.get(this.apiUrl + 'tracks?' + parameters).pipe(
       tap((data: {}) => {
         this.data$.next(this.data);
