@@ -23,7 +23,7 @@ export class TestComponent implements OnInit, OnDestroy {
        */
       console.log('START USER');
       console.log(this.spotify.userInfo());
-      console.log(this.spotify.userInfoById(''));
+      console.log(this.spotify.userInfoById('smedjan'));
       console.log('END USER');
 
       /*
@@ -52,10 +52,38 @@ export class TestComponent implements OnInit, OnDestroy {
        *  Tracks
        */
       console.log('START TRACKS');
-      console.log();
+      console.log(this.spotify.tracks('7ouMYWpwJ422jRcDASZB7P'));
+      console.log(this.spotify.trackAnalysis('7ouMYWpwJ422jRcDASZB7P'));
+      console.log(this.spotify.tracksFeatures('7ouMYWpwJ422jRcDASZB7P'));
       console.log('END TRACKS');
 
-      console.log(this.spotify.tracks('7ouMYWpwJ422jRcDASZB7P'));
+      /*
+       *  Artists
+       */
+      console.log('START ARTISTS');
+      console.log(this.spotify.artists(''));
+      console.log(this.spotify.artistAlbums(''));
+      console.log(this.spotify.artistTopTracks('', 'FR'));
+      console.log(this.spotify.artistRelated(''));
+      console.log('END ARTISTS');
+
+      /*
+       *  Player
+       */
+      console.log('START PLAYER');
+      console.log(this.spotify.playerRecent());
+      console.log(this.spotify.playerNow());
+      console.log(this.spotify.playerDevice());
+      console.log(this.spotify.playerTrackNow());
+      console.log(this.spotify.playerNext(''));
+      console.log(this.spotify.playerPrevious(''));
+      console.log(this.spotify.playerPause(''));
+      console.log(this.spotify.playerRepeat(''));
+      console.log(this.spotify.playerSeek(''));
+      console.log(this.spotify.playerShuffle(''));
+      console.log(this.spotify.playerVolume(''));
+      console.log(this.spotify.playerPlay('', ''));
+      console.log('END PLAYER');
 
       return null;
     }));
