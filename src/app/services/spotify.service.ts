@@ -78,15 +78,14 @@ export class SpotifyService {
    *  START Playlist
    */
 
-  public playlistDeleteTracks(id, trackId, trackPos): Observable<{}> {
+  public playlistDeleteTracks(id, trackUri): Observable<{}> {
     const head = new HttpHeaders({
       'Content-Type': 'application/json; charset=utf-8'
     });
 
     const bodyRequest = {
       tracks: [{
-        uri: trackId,
-        positions: [trackPos]
+        uri: trackUri,
       }
       ]
     };
@@ -111,7 +110,7 @@ export class SpotifyService {
     });
 
 
-    return this.http.get(this.apiUrl + 'playlists?' + parameters, {headers: head}).pipe(
+    return this.http.get(this.apiUrl + 'me/playlists?' + parameters, {headers: head}).pipe(
       tap((data: {}) => {
         console.log(data);
         this.data$.next(this.data);
@@ -120,14 +119,13 @@ export class SpotifyService {
     );
   }
 
-  public playlistsById(id, market = 'fr'/*, fields*/): Observable<{}> {
+  public playlistsById(id, market = 'fr'): Observable<{}> {
     const head = new HttpHeaders({
       'Content-Type': 'application/json; charset=utf-8'
     });
 
     const parameters = this.toQueryString({
-      'market': market// ,
-      /*'fields': fields*/
+      'market': market
     });
 
 
@@ -160,7 +158,7 @@ export class SpotifyService {
     );
   }
 
-  public playlistTracks(id, market, limit = 20, offset = 0, field = 'items(added_by.id,track(name,href,album(name,href)))')
+  public playlistTracks(id, market = 'FR', limit = 20, offset = 0, field = 'items(added_by.id,track(name,href,album(name,href)))')
     : Observable<{}> {
     const head = new HttpHeaders({
       'Content-Type': 'application/json; charset=utf-8'
@@ -203,14 +201,14 @@ export class SpotifyService {
     );
   }
 
-  public playlistCreate(name, description = '', type = false): Observable<{}> {
+  public playlistCreate(userId, name, description = '', type = false): Observable<{}> {
     const bodyData = {
       name: name,
       description: description,
       public: type
     };
 
-    return this.http.post(this.apiUrl + 'playlists', bodyData).pipe(
+    return this.http.post(this.apiUrl + 'users/' + userId + '/playlists', bodyData).pipe(
       tap((data: {}) => {
         console.log(data);
         this.data$.next(this.data);
@@ -226,7 +224,7 @@ export class SpotifyService {
       public: type
     };
 
-    return this.http.post(this.apiUrl + 'playlists/' + id, bodyData).pipe(
+    return this.http.put(this.apiUrl + 'playlists/' + id, bodyData).pipe(
       tap((data: {}) => {
         console.log(data);
         this.data$.next(this.data);
@@ -242,7 +240,7 @@ export class SpotifyService {
       insert_before: before
     };
 
-    return this.http.post(this.apiUrl + 'playlists/' + id + '/tracks', bodyData).pipe(
+    return this.http.put(this.apiUrl + 'playlists/' + id + '/tracks', bodyData).pipe(
       tap((data: {}) => {
         console.log(data);
         this.data$.next(this.data);
