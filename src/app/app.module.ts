@@ -13,6 +13,8 @@ import { UserComponent } from './components/user/user.component';
 import { HomeComponent } from './components/home/home.component';
 import { SearchComponent } from './components/search/search.component';
 
+import {MatButtonModule, MatCardModule } from '@angular/material';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +28,9 @@ import { SearchComponent } from './components/search/search.component';
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    SpotifyAuthModule.forRoot()
+    SpotifyAuthModule.forRoot(),
+    MatButtonModule,
+    MatCardModule
   ],
   providers: [
     {
