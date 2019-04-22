@@ -12,9 +12,9 @@ import {SpotifyAuthInterceptor2} from './interceptor/spotifyAuth.interceptor';
 import { UserComponent } from './components/user/user.component';
 import { HomeComponent } from './components/home/home.component';
 import { SearchComponent } from './components/search/search.component';
-
-import {MatButtonModule, MatCardModule } from '@angular/material';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
+
+import {MatButtonModule, MatCardModule, MatToolbarModule, MatMenuModule, MatIconModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -32,7 +32,10 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
     BrowserAnimationsModule,
     SpotifyAuthModule.forRoot(),
     MatButtonModule,
-    MatCardModule
+    MatCardModule,
+    MatToolbarModule,
+    MatMenuModule,
+    MatIconModule
   ],
   providers: [
     {
