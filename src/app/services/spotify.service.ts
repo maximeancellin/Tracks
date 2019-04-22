@@ -13,6 +13,8 @@ export class SpotifyService {
   private data: {} = {};
   private data$: BehaviorSubject<{}>;
   private apiUrl = environment.apiUrl;
+  private userId;
+  private market;
 
   constructor(private http: HttpClient) {
     this.data$ = new BehaviorSubject<{}>(this.data);
@@ -26,6 +28,10 @@ export class SpotifyService {
   public userInfo(): Observable<{}> {
     return this.http.get(this.apiUrl + 'me').pipe(
       tap((data: {}) => {
+        // @ts-ignore
+        this.userId = data.id;
+        // @ts-ignore
+        this.market = data.country;
         this.data$.next(this.data);
       }),
       catchError(this.handleError('getSelf'))
@@ -49,7 +55,7 @@ export class SpotifyService {
    *  Search
    */
 
-  public search(input, type = 'track,artist', market = 'FR', limit = '20', offset = '0'): Observable<{}> {
+  public search(input, type = 'track,artist', market = this.market, limit = '20', offset = '0'): Observable<{}> {
     const head = new HttpHeaders({
       'Content-Type': 'application/json; charset=utf-8'
     });
@@ -119,7 +125,7 @@ export class SpotifyService {
     );
   }
 
-  public playlistsById(id, market = 'fr'): Observable<{}> {
+  public playlistsById(id, market = this.market): Observable<{}> {
     const head = new HttpHeaders({
       'Content-Type': 'application/json; charset=utf-8'
     });
@@ -158,7 +164,7 @@ export class SpotifyService {
     );
   }
 
-  public playlistTracks(id, market = 'FR', limit = 20, offset = 0, field = 'items(added_by.id,track(name,href,album(name,href)))')
+  public playlistTracks(id, market = this.market, limit = 20, offset = 0, field = 'items(added_by.id,track(name,href,album(name,href)))')
     : Observable<{}> {
     const head = new HttpHeaders({
       'Content-Type': 'application/json; charset=utf-8'
@@ -201,7 +207,7 @@ export class SpotifyService {
     );
   }
 
-  public playlistCreate(userId, name, description = '', type = false): Observable<{}> {
+  public playlistCreate(userId = this.userId, name, description = '', type = false): Observable<{}> {
     const bodyData = {
       name: name,
       description: description,
@@ -260,7 +266,7 @@ export class SpotifyService {
 
   // TODO Tester les appels liés au tracks
 
-  public tracks(ids, market = 'FR'): Observable<{}> {
+  public tracks(ids, market = this.market): Observable<{}> {
     const parameters = this.toQueryString({
       'ids' : ids,
       'market' : market
@@ -318,7 +324,7 @@ export class SpotifyService {
     );
   }
 
-  public artistAlbums(id, group = 'single,appears_on', market = 'FR', limit = 1, offset = 0): Observable<{}> {
+  public artistAlbums(id, group = 'single,appears_on', market = this.market, limit = 1, offset = 0): Observable<{}> {
     const head = new HttpHeaders({
       'Content-Type' : 'application/json; charset=utf-8'
     });
