@@ -1,0 +1,25 @@
+<mat-toolbar>
+  <h1>Tracks</h1>
+  <span class="fill-remaining-space"></span>
+  <button mat-icon-button [matMenuTriggerFor]="menu">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item routerLink="/home">
+      <mat-icon>home</mat-icon>
+      <span>Home</span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon>search</mat-icon>
+      <span>Search</span>
+    </button>
+    <button mat-menu-item routerLink="/user">
+      <mat-icon>account_circle</mat-icon>
+      <span>User</span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon>info</mat-icon>
+      <span>About tracks</span>
+    </button>
+  </mat-menu>
+</mat-toolbar>
