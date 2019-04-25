@@ -28,6 +28,10 @@ export class UserComponent implements OnInit, OnDestroy {
     // console.log(JSON.stringify(this.user, null, 2));
   }
 
+  onNavigate(url) {
+    window.open(url, '_blank');
+  }
+
   ngOnDestroy(): void {
     if (this.stream) {
       this.stream.unsubscribe();

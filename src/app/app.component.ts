@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthService} from 'spotify-auth';
 import {filter} from 'rxjs/operators';
@@ -9,10 +9,11 @@ import {CheckAuthService} from './services/check-auth.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
   title = 'Tracks';
 
-  constructor(private  authService:  AuthService, private  router:  Router, private auth: CheckAuthService) {
+  constructor(private elementRef: ElementRef,
+              private  authService:  AuthService, private  router:  Router, private auth: CheckAuthService) {
     // auth.checkConnection();
     // router.navigateByUrl('/home');
   }
@@ -21,5 +22,9 @@ export class AppComponent implements OnInit {
   this.authService.authorizedStream.pipe(filter(x  =>  x)).subscribe(() => {
     this.router.navigate(['home']);
     });
+  }
+
+  ngAfterViewInit(): void {
+    this.elementRef.nativeElement.ownerDocument.body.style.backgroundColor = '#303030';
   }
 }
