@@ -13,9 +13,17 @@ import { UserComponent } from './components/user/user.component';
 import { HomeComponent } from './components/home/home.component';
 import { SearchComponent } from './components/search/search.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
-
-import {MatButtonModule, MatCardModule, MatToolbarModule, MatMenuModule, MatIconModule, MatSidenavModule, MatListModule } from '@angular/material';
 import { PlaylistComponent } from './components/playlist/playlist.component';
+
+import {
+  MatButtonModule,
+  MatCardModule,
+  MatToolbarModule,
+  MatMenuModule,
+  MatIconModule,
+  MatSidenavModule,
+  MatListModule
+} from '@angular/material';
 
 @NgModule({
   declarations: [
