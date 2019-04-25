@@ -15,6 +15,12 @@ import { SearchComponent } from './components/search/search.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { PlaylistComponent } from './components/playlist/playlist.component';
 
+import { PlayerComponent } from './components/player/player.component';
+import { PlayComponent } from './components/player/play/play.component';
+import { NextComponent } from './components/player/next/next.component';
+import { PreviousComponent } from './components/player/previous/previous.component';
+import { VolumeComponent } from './components/player/volume/volume.component';
+
 import {
   MatButtonModule,
   MatCardModule,
@@ -33,7 +39,12 @@ import {
     HomeComponent,
     SearchComponent,
     ToolbarComponent,
-    PlaylistComponent
+    PlaylistComponent,
+    PlayerComponent,
+    PlayComponent,
+    NextComponent,
+    PreviousComponent,
+    VolumeComponent
   ],
   imports: [
     BrowserModule,
