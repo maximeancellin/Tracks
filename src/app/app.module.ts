@@ -14,7 +14,8 @@ import { HomeComponent } from './components/home/home.component';
 import { SearchComponent } from './components/search/search.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 
-import {MatButtonModule, MatCardModule, MatToolbarModule, MatMenuModule, MatIconModule } from '@angular/material';
+import {MatButtonModule, MatCardModule, MatToolbarModule, MatMenuModule, MatIconModule, MatSidenavModule, MatListModule } from '@angular/material';
+import { PlaylistComponent } from './components/playlist/playlist.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import {MatButtonModule, MatCardModule, MatToolbarModule, MatMenuModule, MatIcon
     UserComponent,
     HomeComponent,
     SearchComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    PlaylistComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +37,9 @@ import {MatButtonModule, MatCardModule, MatToolbarModule, MatMenuModule, MatIcon
     MatCardModule,
     MatToolbarModule,
     MatMenuModule,
-    MatIconModule
+    MatIconModule,
+    MatSidenavModule,
+    MatListModule
   ],
   providers: [
     {
