@@ -22,8 +22,10 @@ import {
   MatMenuModule,
   MatIconModule,
   MatSidenavModule,
-  MatListModule
+  MatListModule,
+  MatTableModule
 } from '@angular/material';
+import { ResultComponent } from './components/result/result.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,8 @@ import {
     HomeComponent,
     SearchComponent,
     ToolbarComponent,
-    PlaylistComponent
+    PlaylistComponent,
+    ResultComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +50,8 @@ import {
     MatMenuModule,
     MatIconModule,
     MatSidenavModule,
-    MatListModule
+    MatListModule,
+    MatTableModule
   ],
   providers: [
     {

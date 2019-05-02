@@ -1,6 +1,13 @@
-<mat-list>
-  <h3 mat-subheader>Playlists</h3>
-  <mat-list-item *ngFor="let playlist of data.items">
-    <h4 mat-line>{{playlist.name}}</h4>
-  </mat-list-item>
-</mat-list>
+<mat-drawer-container class="main-container">
+  <mat-drawer mode="side" opened class="side-container">
+    <mat-list>
+      <h3 mat-subheader>Playlists</h3>
+      <mat-list-item *ngFor="let playlist of data.items">
+        <h4 mat-line (click)="loadDatas(playlist.id)">{{playlist.name}}</h4>
+      </mat-list-item>
+    </mat-list>
+  </mat-drawer>
+  <mat-drawer-content>
+    <app-result [data]="tracks"></app-result>
+  </mat-drawer-content>
+</mat-drawer-container>

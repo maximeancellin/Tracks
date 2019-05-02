@@ -297,6 +297,7 @@ export class SpotifyService {
 
     return this.http.get(this.apiUrl + 'audio-features?' + parameters).pipe(
       tap((data: {}) => {
+        console.log(data);
         this.data$.next(this.data);
       }),
       catchError(this.handleError('getSelf'))
