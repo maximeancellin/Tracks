@@ -14,7 +14,7 @@ export class SpotifyService {
   private data$: BehaviorSubject<{}>;
   private apiUrl = environment.apiUrl;
   private userId;
-  private market;
+  private market = 'FR';
 
   constructor(private http: HttpClient) {
     this.data$ = new BehaviorSubject<{}>(this.data);

@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {TokenService} from 'spotify-auth';
 import {Subscription} from 'rxjs';
-import {switchMap} from 'rxjs/operators';
 import {SpotifyService} from '../../services/spotify.service';
+import {switchMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-search',
@@ -10,24 +10,27 @@ import {SpotifyService} from '../../services/spotify.service';
   styleUrls: ['./search.component.scss']
 })
 export class SearchComponent implements OnInit, OnDestroy {
-
   private stream: Subscription | null = null;
-  private data: {} = {};
+  private data: [] = [];
 
   constructor(private tokenSvc: TokenService, private spotify: SpotifyService) {  }
 
   ngOnInit() {
-    const stream = this.tokenSvc.authTokens.pipe(switchMap((x) => {
-      return this.spotify.search('muse');
-    }));
-    this.stream = stream.subscribe((x) => this.data = x);
-    // console.log(this.data);
   }
 
   ngOnDestroy(): void {
     if (this.stream) {
       this.stream.unsubscribe();
     }
+  }
+
+  search(event) {
+    console.log(event.target.value);
+
+    const stream = this.tokenSvc.authTokens.pipe(switchMap((x) => {
+      return this.spotify.search(event.target.value, 'track');
+    }));
+    this.stream = stream.subscribe((x) => this.data = JSON.parse(JSON.stringify(x)));
   }
 
 }
