@@ -1,9 +1,10 @@
 import {Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
 import {TokenService} from 'spotify-auth';
 import {CheckAuthService} from '../../services/check-auth.service';
-import {switchMap} from 'rxjs/operators';
+import {count, switchMap} from 'rxjs/operators';
 import {SpotifyService} from '../../services/spotify.service';
 import {Subscription} from 'rxjs';
+import {isDefined} from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-result',
@@ -15,7 +16,7 @@ export class ResultComponent implements OnInit, OnDestroy, OnChanges {
   private stream: Subscription | null = null;
   private tracksDetails;
   public result = [];
-  @Input() data;
+  @Input() data = null;
   @Input() type;
   displayedColumns: string[] = ['name', 'artist', 'BPM', 'key', 'duration'];
 
@@ -25,15 +26,16 @@ export class ResultComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (this.type === 0) {
-      this.result = this.data;
-    }
-    if (this.type === 1) {
-      this.result = this.data.tracks.items;
-      console.log(this.result);
-    }
-    const ids = this.trackIdToString(this.result);
-    this.playlistDetails(ids);
+      if (this.type === 0) {
+        this.result = this.data;
+      }
+      if (this.type === 1) {
+        if (this.data.hasOwnProperty('tracks')) {
+          this.result = this.data.tracks.items;
+        }
+      }
+      const ids = this.trackIdToString(this.result);
+      this.playlistDetails(ids);
   }
 
   ngOnDestroy(): void {
@@ -43,7 +45,6 @@ export class ResultComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   playlistDetails(ids) {
-    console.log(ids);
     if (ids !== '') {
       const stream = this.tokenSvc.authTokens.pipe(switchMap((x) => {
         return this.spotify.tracksFeatures(ids);
@@ -51,12 +52,12 @@ export class ResultComponent implements OnInit, OnDestroy, OnChanges {
       this.stream = stream.subscribe((x) => {
         this.tracksDetails = JSON.parse(JSON.stringify(x)).audio_features;
         this.tracksDetails.forEach((item, index) => {
-          if (this.type === 0) {
+          if (this.type === 0 && item !== null) {
             this.result[index].track['BPM'] = item.tempo;
             this.result[index].track['key'] = item.key;
             this.result[index].track['time'] = item.duration_ms;
           }
-          if (this.type === 1) {
+          if (this.type === 1 && item !== null && !!this.result[index]) {
             this.result[index]['BPM'] = item.tempo;
             this.result[index]['key'] = item.key;
             this.result[index]['time'] = item.duration_ms;

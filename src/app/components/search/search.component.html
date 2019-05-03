@@ -14,7 +14,7 @@
       <mat-radio-group (change)="search($event)">
         <label>Type of search</label>
         <br>
-        <mat-radio-button value="track,artist" (change)="filter($event)">All</mat-radio-button>
+        <mat-radio-button value="track,artist" (change)="filter($event)" checked>All</mat-radio-button>
         <mat-radio-button value="artist" (change)="filter($event)">Artist</mat-radio-button>
         <mat-radio-button value="track" (change)="filter($event)">Tracks</mat-radio-button>
       </mat-radio-group>

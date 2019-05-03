@@ -29,6 +29,7 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   filter(event) {
+    // @ts-ignore
     this.filterParameters.type = event.value;
   }
 
@@ -38,7 +39,8 @@ export class SearchComponent implements OnInit, OnDestroy {
     }
 
     const stream = this.tokenSvc.authTokens.pipe(switchMap((x) => {
-      return this.spotify.search(this.currentSearch/*, this.filterParameters.type*/);
+      // @ts-ignore
+      return this.spotify.search(this.currentSearch, this.filterParameters.type);
     }));
     this.stream = stream.subscribe((x) => this.data = JSON.parse(JSON.stringify(x)));
   }
