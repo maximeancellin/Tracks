@@ -9,10 +9,20 @@
         </form>
       </mat-list-item>
       <h3 mat-subheader>Filter</h3>
+      <mat-list-item>
+      <form>
+      <mat-radio-group (change)="search($event)">
+        <label>Type of search</label>
+        <br>
+        <mat-radio-button value="track,artist" (change)="filter($event)">All</mat-radio-button>
+        <mat-radio-button value="artist" (change)="filter($event)">Artist</mat-radio-button>
+        <mat-radio-button value="track" (change)="filter($event)">Tracks</mat-radio-button>
+      </mat-radio-group>
+      </form>
+      </mat-list-item>
     </mat-list>
   </mat-drawer>
   <mat-drawer-content>
-    {{spotify.getJson(data)}}
-    <app-result [data]="data"></app-result>
+    <app-result [data]="data" [type]=1></app-result>
   </mat-drawer-content>
 </mat-drawer-container>

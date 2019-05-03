@@ -13,7 +13,6 @@ export class PlaylistComponent implements OnInit, OnDestroy, OnChanges {
   private stream: Subscription | null = null;
   public data: {} = {};
   public tracks: [] = [];
-  public tracksDetails: [] = [];
 
   constructor(private tokenSvc: TokenService, private spotify: SpotifyService) { }
 
@@ -38,27 +37,6 @@ export class PlaylistComponent implements OnInit, OnDestroy, OnChanges {
         return this.spotify.playlistTracks(id, 'FR', 50, 0, 'items(track(id, name, artists))');
       }));
       this.stream = stream.subscribe((x) => this.tracks = JSON.parse(JSON.stringify(x)));
-  }
-
-
-  playlistDetails(ids) {
-    const stream = this.tokenSvc.authTokens.pipe(switchMap((x) => {
-      return this.spotify.tracksFeatures(ids);
-    }));
-    this.stream = stream.subscribe((x) => this.tracksDetails = JSON.parse(JSON.stringify(x)));
-  }
-
-  private trackIdToString(data) {
-    let ids = '';
-
-    console.log(data);
-    if (data.length > 0) {
-      for (const key of data.items) {
-        ids += key.track.id + ',';
-      }
-    }
-
-    return ids;
   }
 
 

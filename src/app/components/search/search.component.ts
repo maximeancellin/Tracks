@@ -12,6 +12,10 @@ import {switchMap} from 'rxjs/operators';
 export class SearchComponent implements OnInit, OnDestroy {
   private stream: Subscription | null = null;
   private data: [] = [];
+  private filterParameters: {} = {
+    type: 'track,artist',
+  };
+  private currentSearch = '';
 
   constructor(private tokenSvc: TokenService, private spotify: SpotifyService) {  }
 
@@ -24,11 +28,17 @@ export class SearchComponent implements OnInit, OnDestroy {
     }
   }
 
+  filter(event) {
+    this.filterParameters.type = event.value;
+  }
+
   search(event) {
-    console.log(event.target.value);
+    if (!!event.target && event.target.value !== '') {
+      this.currentSearch = event.target.value;
+    }
 
     const stream = this.tokenSvc.authTokens.pipe(switchMap((x) => {
-      return this.spotify.search(event.target.value, 'track');
+      return this.spotify.search(this.currentSearch/*, this.filterParameters.type*/);
     }));
     this.stream = stream.subscribe((x) => this.data = JSON.parse(JSON.stringify(x)));
   }

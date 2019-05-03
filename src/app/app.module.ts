@@ -27,7 +27,8 @@ import {
   MatListModule,
   MatTableModule,
   MatFormFieldModule,
-  MatInputModule
+  MatInputModule,
+  MatRadioModule
 } from '@angular/material';
 
 @NgModule({
@@ -57,7 +58,8 @@ import {
     MatTableModule,
     MatFormFieldModule,
     MatInputModule,
-    FormsModule
+    FormsModule,
+    MatRadioModule
   ],
   providers: [
     {
