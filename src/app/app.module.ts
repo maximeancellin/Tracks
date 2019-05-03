@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './components/login/login.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {FormsModule} from '@angular/forms';
 
 import {SpotifyAuthModule} from 'spotify-auth';
 import {SpotifyAuthInterceptor2} from './interceptor/spotifyAuth.interceptor';
@@ -14,6 +15,7 @@ import { HomeComponent } from './components/home/home.component';
 import { SearchComponent } from './components/search/search.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { PlaylistComponent } from './components/playlist/playlist.component';
+import { ResultComponent } from './components/result/result.component';
 
 import {
   MatButtonModule,
@@ -23,9 +25,11 @@ import {
   MatIconModule,
   MatSidenavModule,
   MatListModule,
-  MatTableModule
+  MatTableModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatRadioModule
 } from '@angular/material';
-import { ResultComponent } from './components/result/result.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +55,11 @@ import { ResultComponent } from './components/result/result.component';
     MatIconModule,
     MatSidenavModule,
     MatListModule,
-    MatTableModule
+    MatTableModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    MatRadioModule
   ],
   providers: [
     {

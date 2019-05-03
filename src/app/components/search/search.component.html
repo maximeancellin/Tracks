@@ -1,4 +1,28 @@
-<p>
-  search works!
-</p>
-{{ spotify.getJson(data) }}
+<mat-drawer-container class="main-container">
+  <mat-drawer mode="side" opened class="side-container">
+    <mat-list>
+      <mat-list-item>
+        <form class="form-config" >
+          <mat-form-field class="form-width">
+            <input (keyup)="search($event)" matInput placeholder="Search" value="" autofocus>
+          </mat-form-field>
+        </form>
+      </mat-list-item>
+      <h3 mat-subheader>Filter</h3>
+      <mat-list-item>
+      <form>
+      <mat-radio-group (change)="search($event)">
+        <label>Type of search</label>
+        <br>
+        <mat-radio-button value="track,artist" (change)="filter($event)" checked>All</mat-radio-button>
+        <mat-radio-button value="artist" (change)="filter($event)">Artist</mat-radio-button>
+        <mat-radio-button value="track" (change)="filter($event)">Tracks</mat-radio-button>
+      </mat-radio-group>
+      </form>
+      </mat-list-item>
+    </mat-list>
+  </mat-drawer>
+  <mat-drawer-content>
+    <app-result [data]="data" [type]=1></app-result>
+  </mat-drawer-content>
+</mat-drawer-container>

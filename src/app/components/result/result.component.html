@@ -1,27 +1,62 @@
 <table mat-table [dataSource]="result" class="mat-elevation-z8">
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef> Name </th>
-    <td mat-cell *matCellDef="let element"> {{element.track.name}} </td>
+    <td mat-cell *matCellDef="let element">
+      <div *ngIf="type == 0">
+        {{element.track.name}}
+      </div>
+      <div *ngIf="type == 1">
+        {{element.name}}
+      </div>
+    </td>
   </ng-container>
 
   <ng-container matColumnDef="artist">
   <th mat-header-cell *matHeaderCellDef> Artist </th>
-  <td mat-cell *matCellDef="let element"> {{element.track.artists[0].name}} </td>
+  <td mat-cell *matCellDef="let element">
+    <div *ngIf="type == 0">
+      {{element.track.artists[0].name}}
+    </div>
+    <div *ngIf="type == 1">
+      {{element.artists[0].name}}
+    </div>
+  </td>
   </ng-container>
 
   <ng-container matColumnDef="BPM">
     <th mat-header-cell *matHeaderCellDef> BPM </th>
-    <td mat-cell *matCellDef="let element"> {{element.track.BPM}} </td>
+    <td mat-cell *matCellDef="let element">
+      <div *ngIf="type == 0">
+        {{element.track.BPM}}
+      </div>
+      <div *ngIf="type == 1">
+        {{element.BPM}}
+      </div>
+    </td>
   </ng-container>
 
   <ng-container matColumnDef="key">
     <th mat-header-cell *matHeaderCellDef> key </th>
-    <td mat-cell *matCellDef="let element"> {{element.track.key}} </td>
+    <td mat-cell *matCellDef="let element">
+      <div *ngIf="type == 0">
+        {{element.track.key}}
+      </div>
+      <div *ngIf="type == 1">
+        {{element.key}}
+      </div>
+    </td>
   </ng-container>
 
   <ng-container matColumnDef="duration">
     <th mat-header-cell *matHeaderCellDef> Duration </th>
-    <td mat-cell *matCellDef="let element"> {{element.track.time}} </td>
+    <td mat-cell *matCellDef="let element">
+      <div *ngIf="type == 0">
+        {{element.track.time}}
+      </div>
+      <div *ngIf="type == 1">
+        {{element.time}}
+      </div>
+    </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

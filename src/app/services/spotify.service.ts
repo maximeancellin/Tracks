@@ -14,7 +14,7 @@ export class SpotifyService {
   private data$: BehaviorSubject<{}>;
   private apiUrl = environment.apiUrl;
   private userId;
-  private market;
+  private market = 'FR';
 
   constructor(private http: HttpClient) {
     this.data$ = new BehaviorSubject<{}>(this.data);
@@ -55,7 +55,7 @@ export class SpotifyService {
    *  Search
    */
 
-  public search(input, type = 'track,artist', market = this.market, limit = '20', offset = '0'): Observable<{}> {
+  public search(input, type = 'track,artist', limit = '50', market = this.market, offset = '0'): Observable<{}> {
     const head = new HttpHeaders({
       'Content-Type': 'application/json; charset=utf-8'
     });
