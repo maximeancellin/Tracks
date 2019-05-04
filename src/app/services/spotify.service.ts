@@ -207,12 +207,15 @@ export class SpotifyService {
     );
   }
 
-  public playlistCreate(userId = this.userId, name, description = '', type = false): Observable<{}> {
+  public playlistCreate(name, description = '', type = false, userId = this.userId): Observable<{}> {
     const bodyData = {
       name: name,
       description: description,
       public: type
     };
+
+    console.log(userId);
+    console.log(this.apiUrl + 'users/' + userId + '/playlists', bodyData);
 
     return this.http.post(this.apiUrl + 'users/' + userId + '/playlists', bodyData).pipe(
       tap((data: {}) => {

@@ -28,7 +28,9 @@ import {
   MatTableModule,
   MatFormFieldModule,
   MatInputModule,
-  MatRadioModule
+  MatRadioModule,
+  MatSnackBarModule,
+  MatExpansionModule
 } from '@angular/material';
 
 @NgModule({
@@ -40,7 +42,7 @@ import {
     SearchComponent,
     ToolbarComponent,
     PlaylistComponent,
-    ResultComponent
+    ResultComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,7 +61,9 @@ import {
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
-    MatRadioModule
+    MatRadioModule,
+    MatSnackBarModule,
+    MatExpansionModule,
   ],
   providers: [
     {

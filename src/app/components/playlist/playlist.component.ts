@@ -3,6 +3,8 @@ import {Subscription} from 'rxjs';
 import {TokenService} from 'spotify-auth';
 import {SpotifyService} from '../../services/spotify.service';
 import {switchMap} from 'rxjs/operators';
+import {NgForm} from '@angular/forms';
+import {MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-playlist',
@@ -13,10 +15,19 @@ export class PlaylistComponent implements OnInit, OnDestroy, OnChanges {
   private stream: Subscription | null = null;
   public data: {} = {};
   public tracks: [] = [];
+  public playlist: [] = [];
 
-  constructor(private tokenSvc: TokenService, private spotify: SpotifyService) { }
+  private name;
+  private description;
+
+  constructor(private tokenSvc: TokenService, private spotify: SpotifyService, private snackbar: MatSnackBar) {
+  }
 
   ngOnInit() {
+    this.loadPlaylist();
+  }
+
+  loadPlaylist() {
     const stream = this.tokenSvc.authTokens.pipe(switchMap((x) => {
       return this.spotify.playlists();
     }));
@@ -39,11 +50,30 @@ export class PlaylistComponent implements OnInit, OnDestroy, OnChanges {
       this.stream = stream.subscribe((x) => this.tracks = JSON.parse(JSON.stringify(x)));
   }
 
+  createPlaylist(f: NgForm) {
+    if (f.valid) {
+      const stream = this.tokenSvc.authTokens.pipe(switchMap((x) => {
+        return this.spotify.playlistCreate(f.value.name, f.value.description);
+      }));
+      this.stream = stream.subscribe((x) => {
+        this.playlist = JSON.parse(JSON.stringify(x));
+        if (!!this.playlist.uri) {
+          this.snackbar.open('Playlist ' + this.playlist.description + ' created !', 'Ok', {
+            duration: 3000
+          });
+          this.loadPlaylist();
+        } else {
+          this.snackbar.open('Error !', 'Ok', {
+            duration: 3000
+          });
+        }
+      });
+    }
+  }
 
   ngOnDestroy(): void {
     if (this.stream) {
       this.stream.unsubscribe();
     }
   }
-
 }
