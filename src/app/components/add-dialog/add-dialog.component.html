@@ -1,0 +1,13 @@
+<h2 mat-dialog-title>Add in playlist</h2>
+<mat-dialog-content class="mat-typography">
+  <mat-list>
+    <h3 mat-subheader>Playlists</h3>
+    <mat-list-item *ngFor="let playlist of data.items">
+      <h4 mat-line (click)="selectedList(playlist.id)">{{playlist.name}}</h4>
+    </mat-list-item>
+  </mat-list>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="dialogData" cdkFocusInitial>Add</button>
+</mat-dialog-actions>

@@ -16,6 +16,7 @@ export class PlaylistComponent implements OnInit, OnDestroy, OnChanges {
   public data: {} = {};
   public tracks: [] = [];
   public playlist: [] = [];
+  public listId;
 
   private name;
   private description;
@@ -35,6 +36,7 @@ export class PlaylistComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   loadDatas(id) {
+    this.listId = id;
     this.playlistTracks(id);
   }
 
@@ -45,7 +47,7 @@ export class PlaylistComponent implements OnInit, OnDestroy, OnChanges {
     playlistTracks(id) {
 
       const stream = this.tokenSvc.authTokens.pipe(switchMap((x) => {
-        return this.spotify.playlistTracks(id, 'FR', 50, 0, 'items(track(id, name, artists))');
+        return this.spotify.playlistTracks(id, 'FR', 50, 0, 'items(track(id, name, artists, preview_url, uri))');
       }));
       this.stream = stream.subscribe((x) => this.tracks = JSON.parse(JSON.stringify(x)));
   }
