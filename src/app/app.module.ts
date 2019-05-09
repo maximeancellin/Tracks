@@ -35,6 +35,7 @@ import {
   MatDialogModule
 } from '@angular/material';
 import { AddDialogComponent } from './components/add-dialog/add-dialog.component';
+import { MoveDialogComponent } from './components/move-dialog/move-dialog.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { AddDialogComponent } from './components/add-dialog/add-dialog.component
     ResultComponent,
     DeleteDialogComponent,
     AddDialogComponent,
+    MoveDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -73,7 +75,8 @@ import { AddDialogComponent } from './components/add-dialog/add-dialog.component
   ],
   entryComponents: [
     DeleteDialogComponent,
-    AddDialogComponent
+    AddDialogComponent,
+    MoveDialogComponent
   ],
   providers: [
     {

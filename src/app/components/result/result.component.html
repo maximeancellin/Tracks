@@ -1,3 +1,8 @@
+<button mat-menu-item (click)="openMoveDialog('test')">
+  <mat-icon>compare_arrows</mat-icon>
+  <span>Move</span>
+</button>
+
 <table mat-table [dataSource]="result" class="mat-elevation-z8">
   <ng-container matColumnDef="select">
     <th mat-header-cell *matHeaderCellDef>

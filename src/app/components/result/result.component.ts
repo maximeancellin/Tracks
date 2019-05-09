@@ -8,6 +8,7 @@ import {isDefined} from '@angular/compiler/src/util';
 import {DeleteDialogComponent} from '../delete-dialog/delete-dialog.component';
 import {MatDialog} from '@angular/material';
 import {AddDialogComponent} from '../add-dialog/add-dialog.component';
+import {MoveDialogComponent} from '../move-dialog/move-dialog.component';
 
 @Component({
   selector: 'app-result',
@@ -126,6 +127,20 @@ export class ResultComponent implements OnInit, OnDestroy, OnChanges {
       if (result) {
         const stream = this.tokenSvc.authTokens.pipe(switchMap((x) => {
           return this.spotify.playlistAddTracks(result, 0, trackUri);
+        }));
+        this.stream = stream.subscribe((x) => console.log(x));
+      }
+    });
+  }
+
+  openMoveDialog(trackUri) {
+    const dialogRef = this.dialog.open(MoveDialogComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+      if (result) {
+        const stream = this.tokenSvc.authTokens.pipe(switchMap((x) => {
+          return this.spotify.playlistReorder(this.listId, null, null, null);
         }));
         this.stream = stream.subscribe((x) => console.log(x));
       }
