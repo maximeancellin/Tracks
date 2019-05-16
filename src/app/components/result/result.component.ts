@@ -20,16 +20,12 @@ export class ResultComponent implements OnInit, OnDestroy, OnChanges {
   private stream: Subscription | null = null;
   private tracksDetails;
   public result = [];
-  private player;
   @Input() data = null;
   @Input() listId = null;
   @Input() type;
   displayedColumns: string[] = ['select', 'index', 'name', 'artist', 'BPM', 'key', 'duration', 'demo'];
 
-  public test;
-
   constructor(private tokenSvc: TokenService, private auth: CheckAuthService, private spotify: SpotifyService, private dialog: MatDialog) {
-    this.player = new Audio();
   }
 
   ngOnInit() {
@@ -94,14 +90,6 @@ export class ResultComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     return ids;
-  }
-
-  playDemo(url) {
-    console.log('url', url);
-    this.player.src = url;
-    this.player.load();
-    this.player.play();
-    console.log('play');
   }
 
   openDeleteDialog(trackUri) {
