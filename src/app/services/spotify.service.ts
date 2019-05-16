@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {BehaviorSubject, Observable, of} from 'rxjs';
-import {catchError, map, tap} from 'rxjs/operators';
+import {catchError, tap} from 'rxjs/operators';
 import {environment} from '../../environments/environment';
 import {any} from 'codelyzer/util/function';
 
@@ -15,9 +15,11 @@ export class SpotifyService {
   private apiUrl = environment.apiUrl;
   private userId;
   private market = 'FR';
+  private player;
 
   constructor(private http: HttpClient) {
     this.data$ = new BehaviorSubject<{}>(this.data);
+    this.player = new Audio();
   }
 
   /*
@@ -265,9 +267,6 @@ export class SpotifyService {
   /*
    *  START Tracks
    */
-
-  // TODO Tester les appels liés au tracks
-
   public tracks(ids, market = this.market): Observable<{}> {
     const parameters = this.toQueryString({
       'ids' : ids,
@@ -590,6 +589,12 @@ export class SpotifyService {
 
   public getJson(data): {} {
     return JSON.stringify(data);
+  }
+
+  public playDemo(url) {
+    this.player.src = url;
+    this.player.load();
+    this.player.play();
   }
 
   /*
