@@ -16,7 +16,7 @@ export class AddDialogComponent implements OnInit {
   private listId;
 
   constructor(private tokenSvc: TokenService, private spotify: SpotifyService, public dialogRef: MatDialogRef<AddDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public dialogData: DialogData) { }
+              @Inject(MAT_DIALOG_DATA) public dialogData: any) { }
 
   ngOnInit() {
     const stream = this.tokenSvc.authTokens.pipe(switchMap((x) => {

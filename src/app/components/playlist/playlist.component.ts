@@ -59,7 +59,9 @@ export class PlaylistComponent implements OnInit, OnDestroy, OnChanges {
       }));
       this.stream = stream.subscribe((x) => {
         this.playlist = JSON.parse(JSON.stringify(x));
+        // @ts-ignore
         if (!!this.playlist.uri) {
+          // @ts-ignore
           this.snackbar.open('Playlist ' + this.playlist.description + ' created !', 'Ok', {
             duration: 3000
           });

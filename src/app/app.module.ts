@@ -32,7 +32,7 @@ import {
   MatRadioModule,
   MatSnackBarModule,
   MatExpansionModule,
-  MatDialogModule
+  MatDialogModule,
 } from '@angular/material';
 import { AddDialogComponent } from './components/add-dialog/add-dialog.component';
 import { MoveDialogComponent } from './components/move-dialog/move-dialog.component';

@@ -10,15 +10,17 @@ import {AddDialogComponent} from '../add-dialog/add-dialog.component';
   styleUrls: ['./move-dialog.component.scss']
 })
 export class MoveDialogComponent implements OnInit {
+  private trackId;
 
+  // @ts-ignore
   constructor(private tokenSvc: TokenService, private spotify: SpotifyService, public dialogRef: MatDialogRef<AddDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public dialogData: DialogData) { }
+              @Inject(MAT_DIALOG_DATA) public dialogData: any) { }
 
   ngOnInit() {
   }
 
   onNoClick(): void {
-    this.dialogRef.close({data: this.listId});
+    this.dialogRef.close({data: this.trackId});
   }
 
   getInput(event: any) {

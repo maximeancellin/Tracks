@@ -242,13 +242,12 @@ export class SpotifyService {
     );
   }
 
-  public playlistReorder(id, start, length, before): Observable<{}> {
+  public playlistReorder(id, start, before): Observable<{}> {
     const bodyData = {
       range_start: start,
-      range_length: length,
       insert_before: before
     };
-
+    console.log('move', start, before);
     return this.http.put(this.apiUrl + 'playlists/' + id + '/tracks', bodyData).pipe(
       tap((data: {}) => {
         console.log(data);

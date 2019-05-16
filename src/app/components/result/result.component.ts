@@ -98,7 +98,6 @@ export class ResultComponent implements OnInit, OnDestroy, OnChanges {
 
   playDemo(url) {
     console.log('url', url);
-    this.player.stop();
     this.player.src = url;
     this.player.load();
     this.player.play();
@@ -109,12 +108,11 @@ export class ResultComponent implements OnInit, OnDestroy, OnChanges {
     const dialogRef = this.dialog.open(DeleteDialogComponent);
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
       if (result) {
         const stream = this.tokenSvc.authTokens.pipe(switchMap((x) => {
           return this.spotify.playlistDeleteTracks(this.listId, trackUri);
         }));
-        this.stream = stream.subscribe((x) => console.log(x));
+        this.stream = stream.subscribe();
       }
     });
   }
@@ -123,26 +121,24 @@ export class ResultComponent implements OnInit, OnDestroy, OnChanges {
     const dialogRef = this.dialog.open(AddDialogComponent);
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
       if (result) {
         const stream = this.tokenSvc.authTokens.pipe(switchMap((x) => {
           return this.spotify.playlistAddTracks(result, 0, trackUri);
         }));
-        this.stream = stream.subscribe((x) => console.log(x));
+        this.stream = stream.subscribe();
       }
     });
   }
 
-  openMoveDialog(trackUri) {
+  openMoveDialog(trackUri, trackIndex) {
     const dialogRef = this.dialog.open(MoveDialogComponent);
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
       if (result) {
         const stream = this.tokenSvc.authTokens.pipe(switchMap((x) => {
-          return this.spotify.playlistReorder(this.listId, null, null, null);
+          return this.spotify.playlistReorder(this.listId, trackIndex, Number(result));
         }));
-        this.stream = stream.subscribe((x) => console.log(x));
+        this.stream = stream.subscribe();
       }
     });
   }

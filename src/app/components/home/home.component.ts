@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
     const stream = this.tokenSvc.authTokens.pipe(switchMap((x) => {
       return this.spotify.userInfo();
     }));
-    this.stream = stream.subscribe((x) => this.user = x);
+    this.stream = stream.subscribe();
   }
 
 }
