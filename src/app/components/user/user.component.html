@@ -1,5 +1,36 @@
 <div class="main-container">
 <img class="avatar" alt="Profile picture" src="{{user.images[0].url}}">
   <h2 (click)="onNavigate(user.external_urls.spotify)">{{ user.display_name }}</h2>
-{{ spotify.getJson(user) }}
 </div>
+
+<mat-list>
+  <mat-list-item>
+    <span>Email</span>
+    <span class="fill-remaining-space"></span>
+    <span>{{user.email}}</span>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+    <mat-list-item>
+      <span>Country</span>
+      <span class="fill-remaining-space"></span>
+      <span>{{user.country}}</span>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item>
+      <span>Birthday</span>
+      <span class="fill-remaining-space"></span>
+      <span>{{user.birthdate}}</span>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item>
+      <span>Followers</span>
+      <span class="fill-remaining-space"></span>
+      <span>{{user.followers.total}}</span>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item>
+      <span>Product</span>
+      <span class="fill-remaining-space"></span>
+      <span>{{user.product}}</span>
+    </mat-list-item>
+  </mat-list>
