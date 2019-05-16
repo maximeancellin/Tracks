@@ -16,6 +16,7 @@ import { SearchComponent } from './components/search/search.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { PlaylistComponent } from './components/playlist/playlist.component';
 import { ResultComponent } from './components/result/result.component';
+import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.component';
 
 import {
   MatButtonModule,
@@ -28,8 +29,13 @@ import {
   MatTableModule,
   MatFormFieldModule,
   MatInputModule,
-  MatRadioModule
+  MatRadioModule,
+  MatSnackBarModule,
+  MatExpansionModule,
+  MatDialogModule,
 } from '@angular/material';
+import { AddDialogComponent } from './components/add-dialog/add-dialog.component';
+import { MoveDialogComponent } from './components/move-dialog/move-dialog.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +46,10 @@ import {
     SearchComponent,
     ToolbarComponent,
     PlaylistComponent,
-    ResultComponent
+    ResultComponent,
+    DeleteDialogComponent,
+    AddDialogComponent,
+    MoveDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,7 +68,15 @@ import {
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
-    MatRadioModule
+    MatRadioModule,
+    MatSnackBarModule,
+    MatExpansionModule,
+    MatDialogModule,
+  ],
+  entryComponents: [
+    DeleteDialogComponent,
+    AddDialogComponent,
+    MoveDialogComponent
   ],
   providers: [
     {

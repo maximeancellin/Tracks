@@ -5,6 +5,10 @@ import {count, switchMap} from 'rxjs/operators';
 import {SpotifyService} from '../../services/spotify.service';
 import {Subscription} from 'rxjs';
 import {isDefined} from '@angular/compiler/src/util';
+import {DeleteDialogComponent} from '../delete-dialog/delete-dialog.component';
+import {MatDialog} from '@angular/material';
+import {AddDialogComponent} from '../add-dialog/add-dialog.component';
+import {MoveDialogComponent} from '../move-dialog/move-dialog.component';
 
 @Component({
   selector: 'app-result',
@@ -16,11 +20,17 @@ export class ResultComponent implements OnInit, OnDestroy, OnChanges {
   private stream: Subscription | null = null;
   private tracksDetails;
   public result = [];
+  private player;
   @Input() data = null;
+  @Input() listId = null;
   @Input() type;
-  displayedColumns: string[] = ['name', 'artist', 'BPM', 'key', 'duration'];
+  displayedColumns: string[] = ['select', 'index', 'name', 'artist', 'BPM', 'key', 'duration', 'demo'];
 
-  constructor(private tokenSvc: TokenService, private auth: CheckAuthService, private spotify: SpotifyService) { }
+  public test;
+
+  constructor(private tokenSvc: TokenService, private auth: CheckAuthService, private spotify: SpotifyService, private dialog: MatDialog) {
+    this.player = new Audio();
+  }
 
   ngOnInit() {
   }
@@ -53,11 +63,13 @@ export class ResultComponent implements OnInit, OnDestroy, OnChanges {
         this.tracksDetails = JSON.parse(JSON.stringify(x)).audio_features;
         this.tracksDetails.forEach((item, index) => {
           if (this.type === 0 && item !== null) {
+            this.result[index].track['index'] = index;
             this.result[index].track['BPM'] = item.tempo;
             this.result[index].track['key'] = item.key;
             this.result[index].track['time'] = item.duration_ms;
           }
           if (this.type === 1 && item !== null && !!this.result[index]) {
+            this.result[index]['index'] = index;
             this.result[index]['BPM'] = item.tempo;
             this.result[index]['key'] = item.key;
             this.result[index]['time'] = item.duration_ms;
@@ -82,5 +94,52 @@ export class ResultComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     return ids;
+  }
+
+  playDemo(url) {
+    console.log('url', url);
+    this.player.src = url;
+    this.player.load();
+    this.player.play();
+    console.log('play');
+  }
+
+  openDeleteDialog(trackUri) {
+    const dialogRef = this.dialog.open(DeleteDialogComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        const stream = this.tokenSvc.authTokens.pipe(switchMap((x) => {
+          return this.spotify.playlistDeleteTracks(this.listId, trackUri);
+        }));
+        this.stream = stream.subscribe();
+      }
+    });
+  }
+
+  openAddDialog(trackUri) {
+    const dialogRef = this.dialog.open(AddDialogComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        const stream = this.tokenSvc.authTokens.pipe(switchMap((x) => {
+          return this.spotify.playlistAddTracks(result, 0, trackUri);
+        }));
+        this.stream = stream.subscribe();
+      }
+    });
+  }
+
+  openMoveDialog(trackUri, trackIndex) {
+    const dialogRef = this.dialog.open(MoveDialogComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        const stream = this.tokenSvc.authTokens.pipe(switchMap((x) => {
+          return this.spotify.playlistReorder(this.listId, trackIndex, Number(result));
+        }));
+        this.stream = stream.subscribe();
+      }
+    });
   }
 }

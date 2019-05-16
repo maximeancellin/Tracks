@@ -207,12 +207,15 @@ export class SpotifyService {
     );
   }
 
-  public playlistCreate(userId = this.userId, name, description = '', type = false): Observable<{}> {
+  public playlistCreate(name, description = '', type = false, userId = this.userId): Observable<{}> {
     const bodyData = {
       name: name,
       description: description,
       public: type
     };
+
+    console.log(userId);
+    console.log(this.apiUrl + 'users/' + userId + '/playlists', bodyData);
 
     return this.http.post(this.apiUrl + 'users/' + userId + '/playlists', bodyData).pipe(
       tap((data: {}) => {
@@ -239,13 +242,12 @@ export class SpotifyService {
     );
   }
 
-  public playlistReorder(id, start, length, before): Observable<{}> {
+  public playlistReorder(id, start, before): Observable<{}> {
     const bodyData = {
       range_start: start,
-      range_length: length,
       insert_before: before
     };
-
+    console.log('move', start, before);
     return this.http.put(this.apiUrl + 'playlists/' + id + '/tracks', bodyData).pipe(
       tap((data: {}) => {
         console.log(data);
