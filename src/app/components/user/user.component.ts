@@ -14,7 +14,7 @@ export class UserComponent implements OnInit, OnDestroy {
 
   private stream: Subscription | null = null;
 
-  public user: {} = {};
+  public user: {} = null;
 
   constructor(private spotify: SpotifyService, private tokenSvc: TokenService, private auth: CheckAuthService) {
     // auth.checkConnection();

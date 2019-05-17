@@ -17,13 +17,27 @@ import {MoveDialogComponent} from '../move-dialog/move-dialog.component';
 })
 
 export class ResultComponent implements OnInit, OnDestroy, OnChanges {
-  private stream: Subscription | null = null;
-  private tracksDetails;
-  public result = [];
   @Input() data = null;
   @Input() listId = null;
   @Input() type;
-  displayedColumns: string[] = ['select', 'index', 'name', 'artist', 'BPM', 'key', 'duration', 'demo'];
+  private stream: Subscription | null = null;
+  private tracksDetails;
+  private pitchRelation: string[] = [
+    'C',
+    'C#',
+    'D',
+    'D#',
+    'E',
+    'F',
+    'F#',
+    'G',
+    'G#',
+    'A',
+    'A#',
+    'B'
+  ];
+  public result = [];
+  public displayedColumns: string[] = ['select', 'index', 'name', 'artist', 'BPM', 'key', 'duration', 'demo'];
 
   constructor(private tokenSvc: TokenService, private auth: CheckAuthService, private spotify: SpotifyService, private dialog: MatDialog) {
   }
@@ -61,13 +75,14 @@ export class ResultComponent implements OnInit, OnDestroy, OnChanges {
           if (this.type === 0 && item !== null) {
             this.result[index].track['index'] = index;
             this.result[index].track['BPM'] = item.tempo;
-            this.result[index].track['key'] = item.key;
+            this.result[index].track['key'] = this.pitchRelation[item.key];
             this.result[index].track['time'] = item.duration_ms;
           }
           if (this.type === 1 && item !== null && !!this.result[index]) {
+            console.log('index result', this.result[index]);
             this.result[index]['index'] = index;
             this.result[index]['BPM'] = item.tempo;
-            this.result[index]['key'] = item.key;
+            this.result[index]['key'] = this.pitchRelation[item.key];
             this.result[index]['time'] = item.duration_ms;
           }
         });
@@ -90,6 +105,18 @@ export class ResultComponent implements OnInit, OnDestroy, OnChanges {
     }
 
     return ids;
+  }
+
+  msToTime(duration) {
+    let minutes = Math.floor(duration / (1000 * 60) % 60);
+    let seconds = Math.floor(duration / 1000 % 60);
+
+    // @ts-ignore
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    // @ts-ignore
+    seconds = seconds < 10 ? '0' + seconds : seconds;
+
+    return  + minutes + ':' + seconds;
   }
 
   openDeleteDialog(trackUri) {
