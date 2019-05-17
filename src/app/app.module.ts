@@ -36,6 +36,7 @@ import {
 } from '@angular/material';
 import { AddDialogComponent } from './components/add-dialog/add-dialog.component';
 import { MoveDialogComponent } from './components/move-dialog/move-dialog.component';
+import { AboutComponent } from './components/about/about.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { MoveDialogComponent } from './components/move-dialog/move-dialog.compon
     DeleteDialogComponent,
     AddDialogComponent,
     MoveDialogComponent,
+    AboutComponent,
   ],
   imports: [
     BrowserModule,
