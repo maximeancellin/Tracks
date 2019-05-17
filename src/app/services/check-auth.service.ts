@@ -9,16 +9,13 @@ export class CheckAuthService {
 
   private tokenValue;
 
-  constructor(private token: TokenService, private route: Router) {
+  constructor(private token: TokenService, private router: Router) {
     this.tokenValue = token.oAuthToken;
   }
 
   checkConnection() {
-    if (this.tokenValue) {
-      return true;
-    } else {
-      this.route.navigateByUrl('login');
+    if (!this.tokenValue) {
+      this.router.navigateByUrl('login');
     }
-    return false;
   }
 }

@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
   private stream: Subscription | null = null;
 
   constructor(private auth: CheckAuthService, private tokenSvc: TokenService, private spotify: SpotifyService) {
-    // auth.checkConnection();
+    auth.checkConnection();
   }
 
   ngOnInit() {

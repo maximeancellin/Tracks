@@ -3,6 +3,7 @@ import {TokenService} from 'spotify-auth';
 import {Subscription} from 'rxjs';
 import {SpotifyService} from '../../services/spotify.service';
 import {switchMap} from 'rxjs/operators';
+import {CheckAuthService} from '../../services/check-auth.service';
 
 @Component({
   selector: 'app-search',
@@ -17,7 +18,9 @@ export class SearchComponent implements OnInit, OnDestroy {
   };
   private currentSearch = '';
 
-  constructor(private tokenSvc: TokenService, private spotify: SpotifyService) {  }
+  constructor(private tokenSvc: TokenService, private spotify: SpotifyService, private auth: CheckAuthService) {
+    auth.checkConnection();
+  }
 
   ngOnInit() {
   }
