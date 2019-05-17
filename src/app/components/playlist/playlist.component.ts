@@ -41,7 +41,6 @@ export class PlaylistComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
-    console.log(changes);
   }
 
     playlistTracks(id) {

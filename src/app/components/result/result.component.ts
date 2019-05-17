@@ -79,7 +79,6 @@ export class ResultComponent implements OnInit, OnDestroy, OnChanges {
             this.result[index].track['time'] = item.duration_ms;
           }
           if (this.type === 1 && item !== null && !!this.result[index]) {
-            console.log('index result', this.result[index]);
             this.result[index]['index'] = index;
             this.result[index]['BPM'] = item.tempo;
             this.result[index]['key'] = this.pitchRelation[item.key];

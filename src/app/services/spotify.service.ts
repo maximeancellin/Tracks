@@ -101,7 +101,6 @@ export class SpotifyService {
 
     return this.http.request('delete', this.apiUrl + 'playlists/' + id + '/tracks', {body: bodyRequest}).pipe(
       tap((data: {}) => {
-        console.log(data);
         this.data$.next(this.data);
       }),
       catchError(this.handleError('getSelf'))
@@ -121,7 +120,6 @@ export class SpotifyService {
 
     return this.http.get(this.apiUrl + 'me/playlists?' + parameters, {headers: head}).pipe(
       tap((data: {}) => {
-        console.log(data);
         this.data$.next(this.data);
       }),
       catchError(this.handleError('getSelf'))
@@ -140,7 +138,6 @@ export class SpotifyService {
 
     return this.http.get(this.apiUrl + 'playlists/' + id + '?' + parameters, {headers: head}).pipe(
       tap((data: {}) => {
-        console.log(data);
         this.data$.next(this.data);
       }),
       catchError(this.handleError('getSelf'))
@@ -160,7 +157,6 @@ export class SpotifyService {
 
     return this.http.get(this.apiUrl + 'users/' + id + '/playlists?' + parameters, {headers: head}).pipe(
       tap((data: {}) => {
-        console.log(data);
         this.data$.next(this.data);
       }),
       catchError(this.handleError('getSelf'))
@@ -183,7 +179,6 @@ export class SpotifyService {
 
     return this.http.get(this.apiUrl + 'playlists/' + id + '/tracks?' + parameters, {headers: head}).pipe(
       tap((data: {}) => {
-        console.log(data);
         this.data$.next(this.data);
       }),
       catchError(this.handleError('getSelf'))
@@ -203,7 +198,6 @@ export class SpotifyService {
 
     return this.http.post(this.apiUrl + 'playlists/' + id + '/tracks?' + parameters, any, {headers: head}).pipe(
       tap((data: {}) => {
-        console.log(data);
         this.data$.next(this.data);
       }),
       catchError(this.handleError('getSelf'))
@@ -217,12 +211,8 @@ export class SpotifyService {
       public: type
     };
 
-    console.log(userId);
-    console.log(this.apiUrl + 'users/' + userId + '/playlists', bodyData);
-
     return this.http.post(this.apiUrl + 'users/' + userId + '/playlists', bodyData).pipe(
       tap((data: {}) => {
-        console.log(data);
         this.data$.next(this.data);
       }),
       catchError(this.handleError('getSelf'))
@@ -238,7 +228,6 @@ export class SpotifyService {
 
     return this.http.put(this.apiUrl + 'playlists/' + id, bodyData).pipe(
       tap((data: {}) => {
-        console.log(data);
         this.data$.next(this.data);
       }),
       catchError(this.handleError('getSelf'))
@@ -250,10 +239,9 @@ export class SpotifyService {
       range_start: start,
       insert_before: before
     };
-    console.log('move', start, before);
+
     return this.http.put(this.apiUrl + 'playlists/' + id + '/tracks', bodyData).pipe(
       tap((data: {}) => {
-        console.log(data);
         this.data$.next(this.data);
       }),
       catchError(this.handleError('getSelf'))
@@ -299,7 +287,6 @@ export class SpotifyService {
 
     return this.http.get(this.apiUrl + 'audio-features?' + parameters).pipe(
       tap((data: {}) => {
-        console.log(data);
         this.data$.next(this.data);
       }),
       catchError(this.handleError('getSelf'))
@@ -389,7 +376,6 @@ export class SpotifyService {
 
     return this.http.get(this.apiUrl + 'me/player/recently-played?' + parameters, {headers : head}).pipe(
       tap((data: {}) => {
-        console.log(data);
         this.data$.next(this.data);
       }),
       catchError(this.handleError('getSelf'))
@@ -403,7 +389,6 @@ export class SpotifyService {
 
     return this.http.get(this.apiUrl + 'me/player', {headers : head}).pipe(
       tap((data: {}) => {
-        console.log(data);
         this.data$.next(this.data);
       }),
       catchError(this.handleError('getSelf'))
@@ -417,7 +402,6 @@ export class SpotifyService {
 
     return this.http.get(this.apiUrl + 'me/player/devices', {headers : head}).pipe(
       tap((data: {}) => {
-        console.log(data);
         this.data$.next(this.data);
       }),
       catchError(this.handleError('getSelf'))
@@ -431,7 +415,6 @@ export class SpotifyService {
 
     return this.http.get(this.apiUrl + 'me/player/currently-playing', {headers : head}).pipe(
       tap((data: {}) => {
-        console.log(data);
         this.data$.next(this.data);
       }),
       catchError(this.handleError('getSelf'))
@@ -445,7 +428,6 @@ export class SpotifyService {
 
     return this.http.post(this.apiUrl + 'me/player/next?' + parameters, any).pipe(
       tap((data: {}) => {
-        console.log(data);
         this.data$.next(this.data);
       }),
       catchError(this.handleError('getSelf'))
@@ -459,7 +441,6 @@ export class SpotifyService {
 
     return this.http.post(this.apiUrl + 'me/player/previous?' + parameters, any).pipe(
       tap((data: {}) => {
-        console.log(data);
         this.data$.next(this.data);
       }),
       catchError(this.handleError('getSelf'))
@@ -473,7 +454,6 @@ export class SpotifyService {
 
     return this.http.put(this.apiUrl + 'me/player/pause?' + parameters, any).pipe(
       tap((data: {}) => {
-        console.log(data);
         this.data$.next(this.data);
       }),
       catchError(this.handleError('getSelf'))
@@ -488,7 +468,6 @@ export class SpotifyService {
 
     return this.http.put(this.apiUrl + 'me/player/repeat?' + parameters, any).pipe(
       tap((data: {}) => {
-        console.log(data);
         this.data$.next(this.data);
       }),
       catchError(this.handleError('getSelf'))
@@ -503,7 +482,6 @@ export class SpotifyService {
 
     return this.http.put(this.apiUrl + 'me/player/seek?' + parameters, any).pipe(
       tap((data: {}) => {
-        console.log(data);
         this.data$.next(this.data);
       }),
       catchError(this.handleError('getSelf'))
@@ -518,7 +496,6 @@ export class SpotifyService {
 
     return this.http.put(this.apiUrl + 'me/player/shuffle?' + parameters, any).pipe(
       tap((data: {}) => {
-        console.log(data);
         this.data$.next(this.data);
       }),
       catchError(this.handleError('getSelf'))
@@ -533,7 +510,6 @@ export class SpotifyService {
 
     return this.http.put(this.apiUrl + 'me/player/volume?' + parameters, any).pipe(
       tap((data: {}) => {
-        console.log(data);
         this.data$.next(this.data);
       }),
       catchError(this.handleError('getSelf'))
@@ -555,7 +531,6 @@ export class SpotifyService {
 
     return this.http.put(this.apiUrl + 'me/player/play?' + parameters, requestBody).pipe(
       tap((data: {}) => {
-        console.log(data);
         this.data$.next(this.data);
       }),
       catchError(this.handleError('getSelf'))

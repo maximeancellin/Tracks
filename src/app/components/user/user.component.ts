@@ -25,7 +25,6 @@ export class UserComponent implements OnInit, OnDestroy {
       return this.spotify.userInfo();
     }));
     this.stream = stream.subscribe((x) => this.user = x);
-    // console.log(JSON.stringify(this.user, null, 2));
   }
 
   onNavigate(url) {
