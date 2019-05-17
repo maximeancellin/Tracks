@@ -17,7 +17,7 @@ export class UserComponent implements OnInit, OnDestroy {
   public user: {} = null;
 
   constructor(private spotify: SpotifyService, private tokenSvc: TokenService, private auth: CheckAuthService) {
-    // auth.checkConnection();
+    auth.checkConnection();
   }
 
   ngOnInit() {

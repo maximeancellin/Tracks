@@ -13,9 +13,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   title = 'Tracks';
 
   constructor(private elementRef: ElementRef,
-              private  authService:  AuthService, private  router:  Router, private auth: CheckAuthService) {
-    // auth.checkConnection();
-    // router.navigateByUrl('/home');
+              private  authService:  AuthService, private  router:  Router) {
   }
 
   ngOnInit() {
