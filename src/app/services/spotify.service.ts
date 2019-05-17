@@ -16,6 +16,7 @@ export class SpotifyService {
   private userId;
   private market = 'FR';
   private player;
+  private playerCurrent = '';
 
   constructor(private http: HttpClient) {
     this.data$ = new BehaviorSubject<{}>(this.data);
@@ -591,10 +592,16 @@ export class SpotifyService {
     return JSON.stringify(data);
   }
 
-  public playDemo(url) {
-    this.player.src = url;
-    this.player.load();
-    this.player.play();
+  public playDemo(url = '') {
+    if (url === '' || this.playerCurrent === url) {
+      this.player.pause();
+      this.playerCurrent = '';
+    } else {
+      this.player.src = url;
+      this.player.load();
+      this.player.play();
+      this.playerCurrent = url;
+    }
   }
 
   /*

@@ -1,5 +1,6 @@
 <div class="main-container">
-<img class="avatar" alt="Profile picture" src="{{user.images[0].url}}">
+    <img class="avatar" alt="Profile picture" src="{{user.images[0].url}}">
+
   <h2 (click)="onNavigate(user.external_urls.spotify)">{{ user.display_name }}</h2>
 </div>
 
