@@ -107,7 +107,7 @@ export class SpotifyService {
     );
   }
 
-  public playlists(limit = 20, offset = 0): Observable<{}> {
+  public playlists(limit = 50, offset = 0): Observable<{}> {
     const head = new HttpHeaders({
       'Content-Type': 'application/json; charset=utf-8'
     });
@@ -163,7 +163,7 @@ export class SpotifyService {
     );
   }
 
-  public playlistTracks(id, market = this.market, limit = 20, offset = 0, field = 'items(added_by.id,track(name,href,album(name,href)))')
+  public playlistTracks(id, market = this.market, limit = 100, offset = 0, field = 'items(added_by.id,track(name,href,album(name,href)))')
     : Observable<{}> {
     const head = new HttpHeaders({
       'Content-Type': 'application/json; charset=utf-8'

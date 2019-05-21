@@ -46,7 +46,7 @@ export class PlaylistComponent implements OnInit, OnDestroy, OnChanges {
     playlistTracks(id) {
 
       const stream = this.tokenSvc.authTokens.pipe(switchMap((x) => {
-        return this.spotify.playlistTracks(id, 'FR', 50, 0, 'items(track(id, name, artists, preview_url, uri))');
+        return this.spotify.playlistTracks(id, 'FR', 100, 0, 'items(track(id, name, artists, preview_url, uri))');
       }));
       this.stream = stream.subscribe((x) => this.tracks = JSON.parse(JSON.stringify(x)));
   }
