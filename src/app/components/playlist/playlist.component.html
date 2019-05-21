@@ -19,7 +19,12 @@
       </mat-expansion-panel>
       <h3 mat-subheader>Playlists</h3>
       <mat-list-item *ngFor="let playlist of data.items">
-        <h4 mat-line (click)="loadDatas(playlist.id)">{{playlist.name}}</h4>
+        <div *ngIf="listId == playlist.id" class="listSelected">
+          <h4 mat-line (click)="loadDatas(playlist.id)">{{playlist.name}}</h4>
+        </div>
+        <div *ngIf="listId != playlist.id">
+          <h4 mat-line (click)="loadDatas(playlist.id)">{{playlist.name}}</h4>
+        </div>
       </mat-list-item>
     </mat-list>
   </mat-drawer>
